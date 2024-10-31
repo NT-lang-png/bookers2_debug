@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     comment = current_user.comments.new(comment_params)
     comment.book_id = book.id
     if comment.save
+      p comment
       redirect_to request.referer
     else
       redirect_to request.referer
@@ -13,8 +14,7 @@ class CommentsController < ApplicationController
 
   def destroy
     #Comment.find(params[:book_id]).destroy
-    book = Book.find(params[:book_id])
-    comment = current_user.comment.find(params[:id])
+    comment = Comment.find(params[:id])
     comment.destroy
     redirect_to request.referer
   end
